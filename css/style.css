@@ -1,3 +1,55 @@
 body {
     text-align: center;
 }
+
+#congrats {
+    position: fixed;
+    top: 15px;
+    left: 550px;
+    color: white;
+    background: red;
+    border: black 2px solid;
+    border-radius: 10px;
+    padding: 4px;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    transition: all .3s;
+}
+
+#lives {
+    color: white;
+    border: black solid 2px;
+    background: green;
+    border-bottom-left-radius: 10px;
+    width: 100px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#level {
+    color: white;
+    border: black solid 2px;
+    background: #2975b1;
+    width: 100px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-size: 20px;
+    padding: 10px;
+}
+
+#score {
+    color: white;
+    border: black solid 2px;
+    border-bottom-right-radius: 10px;
+    background: #2975b1;
+    width: 100px;
+    position: fixed;
+    top: 0;
+    left: 122px;
+    font-size: 20px;
+    padding: 10px;
+}

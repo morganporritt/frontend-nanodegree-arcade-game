@@ -25,8 +25,8 @@ var Engine = (function(global) {
         ctx = canvas.getContext('2d'),
         lastTime;
 
-    canvas.width = 505;
-    canvas.height = 606;
+    canvas.width = 1414;
+    canvas.height = 1000;
     doc.body.appendChild(canvas);
 
     /* This function serves as the kickoff point for the game loop itself
@@ -57,7 +57,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
-    }
+    };
 
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
@@ -83,18 +83,23 @@ var Engine = (function(global) {
         // checkCollisions();
     }
 
-    /* This is called by the update function and loops through all of the
+    /* This is called by the update function  and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
      * player object. These update methods should focus purely on updating
-     * the data/properties related to the object. Do your drawing in your
+     * the data/properties related to  the object. Do your drawing in your
      * render methods.
      */
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
-        player.update();
+//        allLogs.forEach(function(log) {
+//            log.update(dt);
+//        });
+        allGems.forEach(function(gem) {
+            gem.update(dt);
+        })
     }
 
     /* This function initially draws the "game level", it will then call
@@ -108,15 +113,20 @@ var Engine = (function(global) {
          * for that particular row of the game level.
          */
         var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+                'images/stone-block.png',   // 1Row 1 of 3 of stone
+                'images/water-block.png',   // 2Top row is water
+                'images/water-block.png',   // 3Top row is water
+                'images/water-block.png',   // 4Top row is water
+                'images/stone-block.png',   // 5Row 3 of 3 of stone
+                'images/stone-block.png',   // 6Row 3 of 3 of stone
+                'images/stone-block.png',   // 7Row 3 of 3 of stone
+                'images/grass-block.png',   // 8Row 1 of 2 of grass
+                'images/grass-block.png',   // 9Row 1 of 2 of grass
+                'images/grass-block.png',   // 10Row 1 of 2 of grass
+                'images/grass-block.png'    // 11Row 2 of 2 of grass
             ],
-            numRows = 6,
-            numCols = 5,
+            numRows = 11,
+            numCols = 14,
             row, col;
 
         /* Loop through the number of rows and columns we've defined above
@@ -136,11 +146,12 @@ var Engine = (function(global) {
             }
         }
 
+
         renderEntities();
     }
 
     /* This function is called by the render function and is called on each game
-     * tick. Its purpose is to then call the render functions you have defined
+     * tick. It's purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
      */
     function renderEntities() {
@@ -149,6 +160,14 @@ var Engine = (function(global) {
          */
         allEnemies.forEach(function(enemy) {
             enemy.render();
+        });
+        
+//        allLogs.forEach(function(log) {
+//            log.render();
+//        });
+        
+        allGems.forEach(function(gem) {
+            gem.render();
         });
 
         player.render();
@@ -170,13 +189,15 @@ var Engine = (function(global) {
         'images/stone-block.png',
         'images/water-block.png',
         'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/racecar.png',
+//        'images/log.png',
+        'images/classic_frog.png',
+        'images/gem_blue.png'
     ]);
     Resources.onReady(init);
 
     /* Assign the canvas' context object to the global variable (the window
-     * object when run in a browser) so that developers can use it more easily
+     * object when run in a browser) so that developer's can use it more easily
      * from within their app.js files.
      */
     global.ctx = ctx;

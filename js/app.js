@@ -195,7 +195,10 @@ var checkCollision = function(anEnemy) {
         var congrats = document.getElementById('congrats');
         
 //        body.removeChild(congrats);
-        congrats.remove();
+        if (congrats) {
+            congrats.remove();    
+        }
+        
         
     }
 

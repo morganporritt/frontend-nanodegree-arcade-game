@@ -1,7 +1,8 @@
 // Enemies our player must avoid
-var Enemy = function(x, y, speed) {
+var Enemy = function (x, y, speed) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
+    'use strict';
     this.x = x;
     this.y = y;
     this.speed = speed;
@@ -13,10 +14,11 @@ var Enemy = function(x, y, speed) {
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
+Enemy.prototype.update = function (dt) {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    'use strict';
     this.x = this.x + this.speed * dt;
 
     // Enemies move back to left side once they reach right side.
@@ -25,11 +27,12 @@ Enemy.prototype.update = function(dt) {
     }
 
     // Check for collision with enemies or barrier-walls
-    checkCollision(this);
+    this.checkCollision(this);
 };
 
 // Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
+Enemy.prototype.render = function () {
+    'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
@@ -54,22 +57,25 @@ Enemy.prototype.render = function() {
 
 // a frog picks up a gem for points
 var Gem = function (id, x, y, speed) {
+    'use strict';
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.sprite = 'images/gem_blue.png';
     this.id = id;
-}
+};
 
 // draws the gems to the canvas
-Gem.prototype.render = function() {
+Gem.prototype.render = function () {
+    'use strict';
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // updates the gems and moves them accross canvas
-Gem.prototype.update = function(dt) {
+Gem.prototype.update = function (dt) {
+    'use strict';
     this.x = this.x - this.speed * dt;
-    if (this.x <=0) {
+    if (this.x <= 0) {
         this.x = 1414;
     }
     
@@ -118,16 +124,16 @@ Player.prototype.render = function() {
 
 Player.prototype.handleInput = function(keyPress) {
     if (keyPress == 'left') {
-        player.x -= player.speed;
+        this.x -= this.speed;
     }
     if (keyPress == 'up') {
-        player.y -= player.speed - 20;
+        this.y -= this.speed - 20;
     }
     if (keyPress == 'right') {
-        player.x += player.speed;
+        this.x += this.speed;
     }
     if (keyPress == 'down') {
-        player.y += player.speed - 20;
+        this.y += this.speed - 20;
     }
     console.log('keyPress is: ' + keyPress);
 };
@@ -155,7 +161,7 @@ var displayLives = function(aLives) {
     document.body.insertBefore(livesDiv, firstCanvasTag[0]);
 };
 
-var checkCollision = function(anEnemy) {
+Enemy.prototype.checkCollision = function(anEnemy) {
     // check for collision between enemy and player
     if (
         player.y + 131 >= anEnemy.y + 90
